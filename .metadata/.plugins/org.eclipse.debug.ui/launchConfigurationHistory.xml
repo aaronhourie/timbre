@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<launchHistory>
-<launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/aic3204/.launches/aic3204.launch&quot;/&gt;&#13;&#10;" mode="debug"/>
-<launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/hello_world/.launches/hello_world.launch&quot;/&gt;&#13;&#10;" mode="debug"/>
-<launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/lcd-osd9616/.launches/lcd%2dosd9616.launch&quot;/&gt;&#13;&#10;" mode="debug"/>
-<launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/led/.launches/led.launch&quot;/&gt;&#13;&#10;" mode="debug"/>
-<launch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;true&quot; path=&quot;Texas%20Instruments%20XDS100v2%20USB%20Emulator_0%2fC55xx.launch&quot;/&gt;&#13;&#10;" mode="debug"/>
-<lastLaunch memento="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#13;&#10;&lt;launchConfiguration local=&quot;false&quot; path=&quot;/aic3204/.launches/aic3204.launch&quot;/&gt;&#13;&#10;" mode="debug"/>
-</launchHistory>
