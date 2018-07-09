@@ -20,24 +20,27 @@ color ([0.1, 0.1, 0.1]) union() {
     translate([1/8, 3-1/8, 2+1/8]) cube([1/4, 1/4, 1/8]);
 }
 
-
-translate([0, 0, 2+1/4]) {
-    color([0, 0.5, 1]) 
-    union() {
+color([0, 0.5, 1]) 
+translate([0, 0, 2+1/4]) 
+{
+    union()
+    {
         difference() {
             cube ([5, 3+1/4, 1/8]);
             translate ([-1/16, -1/16, -1/16]) {
                 cube ([1.75, 1, 1/4]);
             }
         }
-        translate([0, 2, 1/8]) 
-        scale([0.1, 0.1, 0.3]) 
+        
+        linear_extrude(height=0.2)
+        translate([0, 2, 0.21]) 
+        scale([0.1, 0.1, 0.4]) 
         {
             text("Timbre");
         }
     }
 }
-
+/**
 translate([1/4, 1/4, 1.9]) {
     color([0, 1, 0]) cube ([3, 2.65, 1/16]);
     
@@ -53,3 +56,4 @@ translate([1/4, 1/4, 1.9]) {
     
     translate([2+1/4, 0, 1/16]) color([0.1, 0.1, 0.1]) cube([3/8, 1/2, 7/32]);
 }
+**/
