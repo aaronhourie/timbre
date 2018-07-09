@@ -1,5 +1,5 @@
 
-color ([0, 0.5, 1]) union() {
+color ([0.1, 0.1, 0.1]) union() {
     
     difference() { 
         cube([5, 3 + 1/4, 2 + 1/4]); 
@@ -21,17 +21,21 @@ color ([0, 0.5, 1]) union() {
 }
 
 
-
- /**   
 translate([0, 0, 2+1/4]) {
     color([0, 0.5, 1]) {
         difference() {
             cube ([5, 3+1/4, 1/8]);
-            translate ([-1/16, -1/16, -1/16]) cube ([1.75, 1, 1/4]);
+            translate ([-1/16, -1/16, -1/16]) {
+                cube ([1.75, 1, 1/4]);
+            }
+        }
+        translate([0, 2, 1/8]) 
+        scale([0.1, 0.1, 0.3]) 
+        {
+            text("Timbre");
         }
     }
 }
-**/
 
 translate([1/4, 1/4, 1.9]) {
     color([0, 1, 0]) cube ([3, 2.65, 1/16]);
