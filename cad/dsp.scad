@@ -22,7 +22,8 @@ color ([0.1, 0.1, 0.1]) union() {
 
 
 translate([0, 0, 2+1/4]) {
-    color([0, 0.5, 1]) {
+    color([0, 0.5, 1]) 
+    union() {
         difference() {
             cube ([5, 3+1/4, 1/8]);
             translate ([-1/16, -1/16, -1/16]) {
