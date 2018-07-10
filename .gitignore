@@ -50,3 +50,9 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# Code Composer Studio
+.launches/*
+Debug/*
+Release/*

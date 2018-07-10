@@ -1,4 +1,4 @@
-
+/**
 color ([0.1, 0.1, 0.1]) union() {
     
     difference() { 
@@ -19,21 +19,37 @@ color ([0.1, 0.1, 0.1]) union() {
     translate([4+5/8, 1/8, 0]) cube([1/4, 1/4, 2 + 1/4]);
     translate([1/8, 3-1/8, 2+1/8]) cube([1/4, 1/4, 1/8]);
 }
+**/
 
 color([0, 0.5, 1]) 
-translate([0, 0, 2+1/4]) 
+//translate([0, 0, 2+1/4]) 
 {
     union()
     {
         difference() {
-            cube ([5, 3+1/4, 1/8]);
+            
+            union() {
+                cube ([5, 3+1/4, 1/2]);
+                translate([4.5, 2.75, 0])cube([1/2, 1/2, 1/2]);
+                translate([0, 2.75, 0])cube([1/2, 1/2, 1/2]);
+                translate([4.5, 0, 0])cube([1/2, 1/2, 1/2]);
+            }
+
+            translate([4.75, 3, 1/4]) cube([1/2, 1/2, 1/2]);
+            translate([-0.25, 3, 1/4]) cube([1/2, 1/2, 1/2]);
+            translate([4.75, -0.25, 1/4]) cube([1/2, 1/2, 1/2]);
+            
+            
             translate ([-1/16, -1/16, -1/16]) {
-                cube ([1.75, 1, 1/4]);
+                cube ([1.75, 1, 3/2]);
+            }
+            translate([1/4, 1/4, -1/16]) {
+                cube([4+1/2, 2+3/4, 3/8]);
             }
         }
-        
-        linear_extrude(height=0.2)
-        translate([0, 2, 0.21]) 
+        translate([5, 2.75, 0.45]) 
+        linear_extrude(height=0.15)
+        rotate([0, 0, 180])
         scale([0.1, 0.1, 0.4]) 
         {
             text("Timbre");
