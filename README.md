@@ -10,4 +10,4 @@ You'll need code composer studio (A license comes with the board)
 You'll also need the EZDSP support libraries: http://support.spectrumdigital.com/boards/ezdsp5535/revc/
 
 
-![Timbre Image](https://raw.githubusercontent.com/aaronhourie/syntheremin/master/timbre.JPG)
+![Timbre Image](https://raw.githubusercontent.com/aaronhourie/timbre/master/timbre.JPG)
