@@ -1,1 +1,0 @@
-"./main.obj" "./fraction.obj" "./aic3204.obj" -l"libc.a" -l"ezdsp5535bsl.lib" -l"rts55x.lib" -l"cslVC5505.lib" "../lnkx.cmd" 

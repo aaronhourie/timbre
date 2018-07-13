@@ -53,6 +53,6 @@ dkms.conf
 
 
 # Code Composer Studio
-.launches/*
-Debug/*
-Release/*
+.launches/
+Debug/
+Release/
