@@ -11,6 +11,7 @@ CG_TOOL_ROOT := D:/TexasInstruments/ccsv4/tools/compiler/c5500
 ORDERED_OBJS += \
 $(GEN_CMDS_QUOTED) \
 "./main.obj" \
+"./fraction.obj" \
 "./aic3204.obj" \
 -l"libc.a" \
 -l"ezdsp5535bsl.lib" \
@@ -128,8 +129,8 @@ timbre.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) D:/TexasInstruments/ccsv4/emulation/
 # Other Targets
 clean:
 	-$(RM) $(C5500_EXECUTABLE_OUTPUTS__QTD) "timbre.out"
-	-$(RM) ".\aic3204.obj" ".\main.obj" 
-	-$(RM) ".\aic3204.pp" ".\main.pp" 
+	-$(RM) ".\aic3204.obj" ".\fraction.obj" ".\main.obj" 
+	-$(RM) ".\aic3204.pp" ".\fraction.pp" ".\main.pp" 
 	-@echo ' '
 
 .PHONY: all clean dependents

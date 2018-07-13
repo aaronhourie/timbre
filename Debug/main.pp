@@ -30,6 +30,7 @@ main.obj: D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boar
 main.obj: D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc/csl_i2s.h
 main.obj: D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc/csl_error.h
 main.obj: D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc/csl_types.h
+main.obj: ../fraction.h
 
 ../main.c: 
 D:/TexasInstruments/ccsv4/tools/compiler/c5500/include/stdio.h: 
@@ -61,3 +62,4 @@ D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp55
 D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc/csl_i2s.h: 
 D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc/csl_error.h: 
 D:/TexasInstruments/ccsv4/tools/compiler/c5500/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc/csl_types.h: 
+../fraction.h: 

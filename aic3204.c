@@ -57,7 +57,7 @@ void init_aic3204( )
     AIC3204_rset( 0,  0x01 );  // Select page 1
     AIC3204_rset( 1,  0x08 );  // Disable crude AVDD generation from DVDD
     AIC3204_rset( 2,  0x01 );  // Enable Analog Blocks, use LDO power
-    AIC3204_rset( 51, 0x48);   // power up MICBIAS with AVDD (0x40)or LDOIN (0x48)
+    AIC3204_rset( 51, 0x40);   // power up MICBIAS with AVDD (0x40)or LDOIN (0x48)
     AIC3204_rset( 123,0x05 );  // Force reference to power up in 40ms
     EZDSP5535_waitusec(50000); // Wait at least 40ms
     AIC3204_rset( 0,  0x00 );  // Select page 0
@@ -87,7 +87,7 @@ void init_aic3204( )
     AIC3204_rset( 13, 0x08 );  // RDAC AFIR routed to HPR
     AIC3204_rset( 0,  0x00 );  // Select page 0
     AIC3204_rset( 64, 0x02 );  // Left vol=right vol
-    AIC3204_rset( 65, 0x00 );  // Left DAC gain to 0dB VOL; Right tracks Left
+    AIC3204_rset( 65, 0x15 );  // Left DAC gain to 0dB VOL; Right tracks Left
     AIC3204_rset( 63, 0xd4 );  // Power up left,right data paths and set channel
     AIC3204_rset( 0,  0x01 );  // Select page 1
     AIC3204_rset( 16, 0x00 );  // Unmute HPL , 0dB gain
