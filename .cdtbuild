@@ -26,6 +26,7 @@
 <listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/include&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/../../../emulation/boards/ezdsp5535_v1/c55xx_csl/inc&quot;"/>
 <listOptionValue builtIn="false" value="&quot;${CG_TOOL_ROOT}/../../../emulation/boards/ezdsp5535_v1/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/timbre/include}&quot;"/>
 </option>
 </tool>
 <tool id="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerDebug.1201031210" name="C5500 Linker" superClass="com.ti.ccstudio.buildDefinitions.C5500_4.3.exe.linkerDebug">
@@ -83,5 +84,6 @@
 </tool>
 </toolChain>
 </configuration>
+<macros/>
 </project>
 </ManagedProjectBuildInfo>

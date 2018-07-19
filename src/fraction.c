@@ -27,3 +27,11 @@ Int16 ndMultInt(Int16 n, Int16 d, Int16 i)
 	
 	return retval;
 }
+
+Fraction getUnitFraction(Fraction *other)
+{
+	Fraction f;
+	f.n = other->d - other->n;
+	f.d = other->d;
+	return f;
+}
