@@ -48,6 +48,7 @@ Int16 AIC3204_rset( Uint16 regnum, Uint16 regval);
 Int16 AIC3204_rget(  Uint16 regnum, Uint16* regval );
 Int16 AIC3204_rset( Uint16 regnum, Uint16 regval );
 
+
 void init_aic3204( )
 {    
     /* Configure AIC3204 */

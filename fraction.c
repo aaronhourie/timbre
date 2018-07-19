@@ -3,8 +3,27 @@
 
 #include "fraction.h"
 
-Int16 fMultInt(Fraction* f, Int16 i) {
+Int16 fMultInt(Fraction* f, Int16 i) 
+{
 	Int16 retval = 0;
-	retval = (i * f->n) / f->d;
+	if (abs(i) >= 180 || abs(f->n) >= 180){
+		retval = (i / f->d) * f->n;
+	}
+	else {
+		retval = (i * f->n) / f->d;
+	}
+	return retval;
+}
+
+Int16 ndMultInt(Int16 n, Int16 d, Int16 i)
+{
+	Int16 retval = 0;
+	if (abs(i) >= 180 || abs(n) >= 180){
+		retval = (i / d) * n;
+	}
+	else {
+		retval = (i * n) / d;
+	}
+	
 	return retval;
 }

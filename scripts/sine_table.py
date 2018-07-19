@@ -3,20 +3,23 @@ import math
 from fractions import Fraction
 
 default_entries = 64
-denom_limit = pow(2, 15) # Int16 is signed 16-bit
+default_denom_limit = 10000
 
 def main():
 
     entries = default_entries
+    denom_limit = default_denom_limit
 
     if len(sys.argv) > 1:
         entries = int(sys.argv[1])
-
-    sinetable = generate_sinetable(entries)
+    if len(sys.argv) > 2:
+        denom_limit = int(sys.argv[2])
+		
+    sinetable = generate_sinetable(entries, denom_limit)
     c_init = generate_c_init(sinetable)
     print(c_init)
 
-def generate_sinetable(entries):
+def generate_sinetable(entries, denom_limit):
     # type: (int) -> list
     sinetable = list()
     for i in range(0, entries):
