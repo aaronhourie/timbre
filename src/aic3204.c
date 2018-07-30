@@ -88,11 +88,11 @@ void init_aic3204( )
     AIC3204_rset( 13, 0x08 );  // RDAC AFIR routed to HPR
     AIC3204_rset( 0,  0x00 );  // Select page 0
     AIC3204_rset( 64, 0x02 );  // Left vol=right vol
-    AIC3204_rset( 65, 0x25 );  // Left DAC gain to 0dB VOL; Right tracks Left
+    AIC3204_rset( 65, 0x10 );  // Left DAC gain to 0dB VOL; Right tracks Left
     AIC3204_rset( 63, 0xd4 );  // Power up left,right data paths and set channel
     AIC3204_rset( 0,  0x01 );  // Select page 1
-    AIC3204_rset( 16, 0x00 );  // Unmute HPL , 0dB gain
-    AIC3204_rset( 17, 0x00 );  // Unmute HPR , 0dB gain
+    AIC3204_rset( 16, 0x15 );  // Unmute HPL , 0dB gain
+    AIC3204_rset( 17, 0x15 );  // Unmute HPR , 0dB gain
     AIC3204_rset( 9 , 0x30 );  // Power up HPL,HPR
     EZDSP5535_waitusec(100 );  // Wait
     

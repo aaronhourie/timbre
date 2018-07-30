@@ -14,7 +14,7 @@
 static Int16 sw1State = 0;
 static Int16 sw2State = 0;
 static Int16 menuIndex = 0;
-static Int16 fxLevel[MENU_SIZE] = {0, 0, 0};
+static Int16 fxLevel[MENU_SIZE] = {0, 2, 0};
 
 static unsigned int charset_6x8[256*3];  
 

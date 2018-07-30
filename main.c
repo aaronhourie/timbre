@@ -10,22 +10,22 @@
 
 #define SAMPLE_RATE_KHZ 48
 #define MAXINT16 32767
-#define WINBUFF_SIZE 6
+#define IMPULSE_SIZE 32
 
 extern void init_aic3204(void);
 extern void close_aic3204(void);
 
-Fraction impulse;
-
 void initBuffer(void);
 void insertSample(Int16);
+Int16 getSample(Int16);
 
 void audioLoop(void);
+Int16 applyImpulse(Int16*);
 Int16 mixer(Int16 ogData, Int16 filterData);
 Int16 overdrive(Int16);
-Int16 tremolo(Int16, Int16, Int16) ;
+Int16 tremolo(Int16, Int16, Int16);
 
-Int16 winBuff[WINBUFF_SIZE];
+Int16 winBuff[IMPULSE_SIZE];
 Int16 curPos = 0;
 Int16 bufferFull = 0;
 Int16 running = 0;
@@ -53,6 +53,16 @@ Int16 sineTable[64][2] = {
 	{-9, 31}, {-8, 41}, {-5, 51},
 };
 
+Int16 lowPassImpulse[IMPULSE_SIZE][2] = {
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32},
+	{1, 32}, {1, 32}, {1, 32}, {1, 32}
+};
 
 Fraction ogMix;
 Fraction filterMix;
@@ -69,14 +79,8 @@ void main()
     
     // Init the mixer default (0.5)
    	ogMix.n = 1;
-	ogMix.d = 8;
+	ogMix.d = 2;
 	
-	// Init the impulse for the low-pass filter. 
-	impulse.n = 1;
-	impulse.d = WINBUFF_SIZE;
-    
-    // Init switches.
-    
     // Begin run.
     running = 1;
     // Begin audio loop. 
@@ -92,7 +96,7 @@ void insertData(Int16 data)
 		// Increment the cursor.
 		curPos += 1;
 		// If the cursor reaches the end
-		if (curPos == WINBUFF_SIZE) {
+		if (curPos == IMPULSE_SIZE) {
 			// Start cursor over, mark buffer as full.
 			curPos = 0;
 			bufferFull = 1;
@@ -100,15 +104,18 @@ void insertData(Int16 data)
 	}
 	else {
 		winBuff[curPos] = data;
-		curPos = (curPos + 1) % WINBUFF_SIZE;
+		curPos = (curPos + 1) % IMPULSE_SIZE;
 	}
+}
+
+Int16 getSample(Int16 index) {
+	return winBuff[(curPos+index) % IMPULSE_SIZE];
 }
 
 void audioLoop() 
 {
 	Int16 sec=0, msec=0;
     Int16 sample, ogData, filterData;
-    Int16 i = 0;
     Int16 output;
     Int16 filterLevel = 0;
     
@@ -117,20 +124,19 @@ void audioLoop()
 	        for ( sample = 0 ; sample < SAMPLE_RATE_KHZ ; sample++ )
 	        {
 	        	filterLevel = 0;
-	            /* Read 16-bit right channel Data */
-	            
+	        	// Only use left channel. 
 	            EZDSP5535_I2S_readLeft(&ogData);
 	            
+	            // At first, filter data is equivalent. 
 	            filterData = ogData;
 	            output = 0;
-	            
+	            // Insert the data into the windowing function.
+	            insertData(ogData);
+	            // Begin filter chain. If filterlevel is nonzero in menu, apply it. 
+	            // Each consecutive filter is compounded on the previous. 
 	            filterLevel = getFilterLevel(OPT_LOWPASS);
 	            if (filterLevel != 0){
-		            insertData(ogData);
-	                for (i = 0; i < WINBUFF_SIZE; i++) {
-	               	
-	                	filterData += fMultInt(&impulse, winBuff[i]);
-	                }            
+					filterData = applyImpulse((Int16*)lowPassImpulse);          
 	            }
 	            
 				filterLevel = getFilterLevel(OPT_OVERDRIVE);
@@ -140,13 +146,13 @@ void audioLoop()
 	            
 	            filterLevel = getFilterLevel(OPT_TREMOLO);
 	            if (filterLevel != 0){
+	            	// Tremolo has two modes: 3Hz and 8Hz
 	            	tremoloFreq = filterLevel > 1 ? 8 : 3;
 	            	filterData = tremolo(filterData, sec, msec);
 	            }
-	            
-	            //output = mixer(ogData, filterData);
+	            // Apply mixing function.
+	            output = mixer(ogData, filterData);
 	            output = filterData;
-	            
 	            /* Write 16-bit right channel Data */
 	            EZDSP5535_I2S_writeRight(output);
 	            EZDSP5535_I2S_writeLeft(output);
@@ -167,6 +173,21 @@ void audioLoop()
     close_aic3204();
 }
 
+Int16 applyImpulse(Int16 *impResponse)
+{
+	Int16 i;
+	Int16 index;
+	Int16 windowData;
+	Int16 sum = 0;
+	for (i = 0; i < IMPULSE_SIZE; i++) {
+		index = i*2;
+		windowData = winBuff[i];
+		sum += ndMultInt(impResponse[index], impResponse[index+1], windowData);
+	}
+	
+	return sum;
+}
+
 Int16 mixer(Int16 ogData, Int16 filterData) 
 {
 	Int16 retVal = 0;
@@ -183,19 +204,20 @@ Int16 tremolo(Int16 data, Int16 sec, Int16 msec)
 {
 	Int16 period = 1000/tremoloFreq;
 	Int16 time = ((sec*1000) + msec) % period;
-	Int16 phase = ((tableSize * time)/1000) * tremoloFreq;
-	Int16 index = abs(phase  % tableSize);
-	Int16 retVal = ndMultInt(sineTable[index][0], sineTable[index][1], data);
+	Int16 phase = ndMultInt(tableSize, period, time);
+	Int16 index = phase % tableSize;
+	Int16 retVal;
+	retVal = ndMultInt(sineTable[index][0], sineTable[index][1], data);
 	return retVal;
 }
 
 Int16 overdrive(Int16 data) 
 {
 	if (abs(data) <= MAXINT16/3) {
-		return data*2;
+		return data*4;
 	}
 	else if (abs(data) <= (MAXINT16/3) * 2) {
-		return ndMultInt(2, 3, data);
+		return ndMultInt(4, 3, data);
 	}
 	else {
 		return MAXINT16;

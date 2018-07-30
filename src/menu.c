@@ -8,7 +8,7 @@ void initMenu()
     EZDSP5535_OSD9616_init();
 	
 	// Deactivate Scrolling
-    EZDSP5535_OSD9616_send(0x00,0x2e);  
+    //EZDSP5535_OSD9616_send(0x00,0x2e);  
     
     /* Fill page 1*/ 
     EZDSP5535_OSD9616_send(0x00,0x00);   // Set low column address
