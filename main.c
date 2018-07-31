@@ -3,7 +3,7 @@
 #include "ezdsp5535.h"
 #include "ezdsp5535_i2s.h"
 #include "ezdsp5535_sar.h"
-#include "csl_i2s.h"
+#include "board_setup.h"
 
 #include "fraction.h"
 #include "menu.h"
@@ -11,10 +11,14 @@
 #define SAMPLE_RATE_KHZ 48
 #define MAXINT16 32767
 #define IMPULSE_SIZE 32
+/* Execute idle instruction */
+asm(" idle");
 
 extern void init_aic3204(void);
 extern void close_aic3204(void);
+extern void pllInit(void);
 
+void systemInit(void);
 void initBuffer(void);
 void insertSample(Int16);
 Int16 getSample(Int16);
@@ -70,6 +74,7 @@ Fraction filterMix;
 void main()
 {
 
+	pllInit();
 	// Initialize chip.
     EZDSP5535_init( );
 	initMenu();
@@ -86,6 +91,7 @@ void main()
     // Begin audio loop. 
     audioLoop();
 }
+
 
 void insertData(Int16 data) 
 {
@@ -151,7 +157,7 @@ void audioLoop()
 	            	filterData = tremolo(filterData, sec, msec);
 	            }
 	            // Apply mixing function.
-	            output = mixer(ogData, filterData);
+	            //output = mixer(ogData, filterData);
 	            output = filterData;
 	            /* Write 16-bit right channel Data */
 	            EZDSP5535_I2S_writeRight(output);

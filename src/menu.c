@@ -7,8 +7,8 @@ void initMenu()
 	// Startup adapted from Spectrum Digital library, oled_test.c
     EZDSP5535_OSD9616_init();
 	
-	// Deactivate Scrolling
-    //EZDSP5535_OSD9616_send(0x00,0x2e);  
+	// Activate Scrolling
+    EZDSP5535_OSD9616_send(0x00,0x2f);  
     
     /* Fill page 1*/ 
     EZDSP5535_OSD9616_send(0x00,0x00);   // Set low column address

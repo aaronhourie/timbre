@@ -48,6 +48,10 @@ Int16 AIC3204_rset( Uint16 regnum, Uint16 regval);
 Int16 AIC3204_rget(  Uint16 regnum, Uint16* regval );
 Int16 AIC3204_rset( Uint16 regnum, Uint16 regval );
 
+extern Int16 EZDSP5535_I2C_init ( );
+extern Int16 EZDSP5535_I2C_close( );
+extern Int16 EZDSP5535_I2C_read( Uint16 i2c_addr, Uint16* data, Uint16 len );
+extern Int16 EZDSP5535_I2C_write( Uint16 i2c_addr, Uint16* data, Uint16 len );
 
 void init_aic3204( )
 {    
